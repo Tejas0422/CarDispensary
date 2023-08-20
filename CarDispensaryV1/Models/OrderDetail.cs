@@ -26,6 +26,9 @@ namespace CarDispensaryV1.Models
         public string VisitMode { get; set; }
         public Nullable<int> ServiceId { get; set; }
         public string GarageName { get; set; }
+        public Nullable<double> ServicePrice { get; set; }
+        public string VarientName { get; set; }
+        public Nullable<bool> ServiceDone { get; set; }
     
         public virtual Service Service { get; set; }
     }

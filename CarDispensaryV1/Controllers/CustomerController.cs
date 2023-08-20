@@ -53,27 +53,27 @@ namespace CarDispensary.Controllers
 
         #region CustomerLogin
 
-        [HttpPost]
-        [Route("api/Customer/Login")]
+        //[HttpPost]
+        //[Route("api/Customer/Login")]
 
-        public IHttpActionResult Login(Customer customer)
-        {
-            if (customer != null)
-            {
-                var existingCustomer = CD.Customers.FirstOrDefault(c => c.CustEmail == customer.CustEmail && c.CustPassword == customer.CustPassword);
-                if (existingCustomer != null)
-                {
+        //public IHttpActionResult Login(Customer customer)
+        //{
+        //    if (customer != null)
+        //    {
+        //        var existingCustomer = CD.Customers.FirstOrDefault(c => c.CustEmail == customer.CustEmail && c.CustPassword == customer.CustPassword);
+        //        if (existingCustomer != null)
+        //        {
 
-                    return Ok("Login successful.");
-                }
-                else
-                {
-                    return Ok("Invalid email or customer does not exist.");
-                }
-            }
+        //            return Ok("Login successful.");
+        //        }
+        //        else
+        //        {
+        //            return Ok("Invalid email or customer does not exist.");
+        //        }
+        //    }
 
-            return Ok("Invalid customer data.");
-        }
+        //    return Ok("Invalid customer data.");
+        //}
 
         #endregion
 

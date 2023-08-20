@@ -31,8 +31,9 @@ namespace CarDispensary.Controllers
         {
             var result = CD.Brands.Select(r => new
             {
+                BrandId = r.BrandId,    
                 BrandName = r.BrandName,
-                BrandImage = "http://localhost:56084/images/" + r.BrandImage,
+                BrandImage = "http://localhost:63650//images/" + r.BrandImage,
 
             }).ToList();
 
@@ -71,7 +72,9 @@ namespace CarDispensary.Controllers
                 .Where(r=>r.BrandId == brandId).
                 Select(r=>new
                 {
-                    ModelName = r.CarModel.ModelName
+                    ModelId = r.CarModel.ModelId,
+                    ModelName = r.CarModel.ModelName,
+                     BrandImage = "http://localhost:63650//images/" + r.CarModel.ModelImage,
                 }).Distinct().ToList();
             return Ok(result);   
         }
@@ -88,7 +91,7 @@ namespace CarDispensary.Controllers
                 Where(r => r.VarientId == 1 )
                 .Select(r => new 
                 {
-                    VarImage = "http://localhost:56084/images/" + r.VarImage,            
+                    VarImage = "http://localhost:63650//images/" + r.VarImage,            
                 }).ToList();
                 
 
@@ -109,7 +112,7 @@ namespace CarDispensary.Controllers
                 .Where(r => r.BrandId == brandId &&  r.ServiceId==serviceId && r.VarientId==varientId)
                 .Select(r => new
                 {
-                    VarImage = "http://localhost:56084/images/" + r.CarModel.ModelImage,
+                    VarImage = "http://localhost:63650//images/" + r.CarModel.ModelImage,
                     ModelName = r.CarModel.ModelName,
                     ServiceName = r.Service.ServiceName,
                     price = r.Price
@@ -122,9 +125,9 @@ namespace CarDispensary.Controllers
         }
 
         #endregion
-  
-    
-    
+
+
+     
     
     }
 }

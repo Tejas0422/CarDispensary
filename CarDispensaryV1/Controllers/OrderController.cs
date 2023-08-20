@@ -15,20 +15,29 @@ namespace CarDispensaryV1.Controllers
        
         CarDispensaryEntities CD = new CarDispensaryEntities();
 
-
-
-        #region Add orderDetail
+      
+       
+        // At the time of Add cart
+        #region Add orderDetail    
 
         [HttpPost]
-        [Route("api/Order/orderDetail")]
+        [Route("api/Order/orderDetail/{id}")]
 
-        public IHttpActionResult orderDetail(OrderDetail orderDetail)
+        public IHttpActionResult orderDetail( int id, OrderDetail orderDetail)
         {
-            if (orderDetail != null) 
+            if (orderDetail != null && id > 0) 
             {
-                CD.OrderDetails.Add(orderDetail);   
+                var ExistingCustomer = CD.Customers.Find(id);
+
+                orderDetail.CustomerName = ExistingCustomer.CustName;
+                orderDetail.CustAddress = ExistingCustomer.CustAddress;
+                orderDetail.CustEmail = ExistingCustomer.CustEmail;
+                orderDetail.CustMobileNo = ExistingCustomer.CustMobile;
+                CD.OrderDetails.Add(orderDetail);
+                
                 CD.SaveChanges();
                 return Ok("OrderDetail Succefully Added...! ");
+
             }
             else
             {
@@ -38,7 +47,7 @@ namespace CarDispensaryV1.Controllers
            
         }
 
-        #endregion
+        #endregion     
 
         #region update OrderDetail
         [HttpPut]
@@ -61,6 +70,9 @@ namespace CarDispensaryV1.Controllers
                 OD.VehicleModel = orderDetail.VehicleModel; 
                 OD.ServiceId = orderDetail.ServiceId;
                 OD.CustEmail = orderDetail.CustEmail;
+                OD.ServiceDone = orderDetail.ServiceDone;   
+                OD.ServicePrice = orderDetail.ServicePrice; 
+                OD.VarientName= orderDetail.VarientName;    
 
                 CD.SaveChanges();
                 return Ok("OrderDetail Edited Succefull..!");
@@ -101,6 +113,12 @@ namespace CarDispensaryV1.Controllers
         #endregion
     }
 }
+
+
+
+
+
+
 
 
 

@@ -66,17 +66,20 @@
       <PropertyRef Name="OrderId" />
     </Key>
     <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CarRegistrationNo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ManufacturingYear" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="OdometerReading" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="VehicleModel" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="CustMobileNo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CarRegistrationNo" Type="varchar" MaxLength="50" />
+    <Property Name="ManufacturingYear" Type="varchar" MaxLength="30" />
+    <Property Name="OdometerReading" Type="varchar" MaxLength="50" />
+    <Property Name="VehicleModel" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="50" />
+    <Property Name="CustMobileNo" Type="varchar" MaxLength="10" />
     <Property Name="CustEmail" Type="varchar" MaxLength="50" />
-    <Property Name="CustAddress" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="VisitMode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CustAddress" Type="varchar" MaxLength="50" />
+    <Property Name="VisitMode" Type="varchar" MaxLength="50" />
     <Property Name="ServiceId" Type="int" />
-    <Property Name="GarageName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="GarageName" Type="varchar" MaxLength="50" />
+    <Property Name="ServicePrice" Type="float" />
+    <Property Name="VarientName" Type="varchar" MaxLength="50" />
+    <Property Name="ServiceDone" Type="bit" />
   </EntityType>
   <EntityType Name="RateChart">
     <Key>
