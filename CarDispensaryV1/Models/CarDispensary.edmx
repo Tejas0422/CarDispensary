@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarDispensaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarDispensaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="BrandId" />
@@ -71,17 +71,20 @@
             <PropertyRef Name="OrderId" />
           </Key>
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CarRegistrationNo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ManufacturingYear" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="OdometerReading" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="VehicleModel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CustMobileNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CarRegistrationNo" Type="varchar" MaxLength="50" />
+          <Property Name="ManufacturingYear" Type="varchar" MaxLength="30" />
+          <Property Name="OdometerReading" Type="varchar" MaxLength="50" />
+          <Property Name="VehicleModel" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" />
+          <Property Name="CustMobileNo" Type="varchar" MaxLength="10" />
           <Property Name="CustEmail" Type="varchar" MaxLength="50" />
-          <Property Name="CustAddress" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="VisitMode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustAddress" Type="varchar" MaxLength="50" />
+          <Property Name="VisitMode" Type="varchar" MaxLength="50" />
           <Property Name="ServiceId" Type="int" />
-          <Property Name="GarageName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GarageName" Type="varchar" MaxLength="50" />
+          <Property Name="ServicePrice" Type="float" />
+          <Property Name="VarientName" Type="varchar" MaxLength="50" />
+          <Property Name="ServiceDone" Type="bit" />
         </EntityType>
         <EntityType Name="RateChart">
           <Key>
@@ -232,8 +235,7 @@
             <End Role="RateChart" EntitySet="RateChart" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarDispensaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -306,18 +308,21 @@
             <PropertyRef Name="OrderId" />
           </Key>
           <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CarRegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ManufacturingYear" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OdometerReading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VehicleModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustMobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarRegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ManufacturingYear" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OdometerReading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustMobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CustEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VisitMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VisitMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ServiceId" Type="Int32" />
-          <Property Name="GarageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GarageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Service" Relationship="Self.FK__OrderDeta__Servi__3F466844" FromRole="OrderDetail" ToRole="Service" />
+          <Property Name="ServicePrice" Type="Double" />
+          <Property Name="VarientName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceDone" Type="Boolean" />
         </EntityType>
         <EntityType Name="RateChart">
           <Key>
@@ -552,6 +557,9 @@
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="CarDispensaryModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="ServiceDone" ColumnName="ServiceDone" />
+                <ScalarProperty Name="VarientName" ColumnName="VarientName" />
+                <ScalarProperty Name="ServicePrice" ColumnName="ServicePrice" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="CarRegistrationNo" ColumnName="CarRegistrationNo" />
                 <ScalarProperty Name="ManufacturingYear" ColumnName="ManufacturingYear" />

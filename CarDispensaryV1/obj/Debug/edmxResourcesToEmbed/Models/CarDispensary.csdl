@@ -69,18 +69,21 @@
       <PropertyRef Name="OrderId" />
     </Key>
     <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CarRegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ManufacturingYear" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="OdometerReading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="VehicleModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CustMobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CarRegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ManufacturingYear" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="OdometerReading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustMobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="CustEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="VisitMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VisitMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ServiceId" Type="Int32" />
-    <Property Name="GarageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GarageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Service" Relationship="Self.FK__OrderDeta__Servi__3F466844" FromRole="OrderDetail" ToRole="Service" />
+    <Property Name="ServicePrice" Type="Double" />
+    <Property Name="VarientName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServiceDone" Type="Boolean" />
   </EntityType>
   <EntityType Name="RateChart">
     <Key>

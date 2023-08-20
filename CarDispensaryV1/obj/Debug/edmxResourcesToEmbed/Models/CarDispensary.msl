@@ -71,6 +71,9 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="CarDispensaryModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="ServiceDone" ColumnName="ServiceDone" />
+          <ScalarProperty Name="VarientName" ColumnName="VarientName" />
+          <ScalarProperty Name="ServicePrice" ColumnName="ServicePrice" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="CarRegistrationNo" ColumnName="CarRegistrationNo" />
           <ScalarProperty Name="ManufacturingYear" ColumnName="ManufacturingYear" />

@@ -18,8 +18,6 @@ namespace CarDispensaryV1.Models
         public CarDispensaryEntities()
             : base("name=CarDispensaryEntities")
         {
-            //json
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
