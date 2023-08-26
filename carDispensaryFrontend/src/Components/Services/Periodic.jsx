@@ -1,24 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import Package1 from "../Services/image/package1.JPG"
 import "../Services/Periodic.css";
-import { useRef, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
 import standared from "../Services/image/SandardService.jpg";
 import Comprehensive from "../Services/image/Comprahensive.jpg";
-import tataimg from "../Services/image/Tata.png";
-import toyataimg from "../Services/image/toyata.png";
-import marutiimg from "../Services/image/maruti.png";
-import hundaiimg from "../Services/image/hundai.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, } from '@fortawesome/free-solid-svg-icons';
 import { faInr } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Service from "./Service";
+import { Alert } from "reactstrap";
+import { toast } from "react-toastify";
 
 
 
 
-library.add(faCheck, faRupeeSign, faInr)
+library.add(faCheck, faRupeeSign, faInr, faArrowLeft)
 
 
 
@@ -28,40 +28,82 @@ const Periodic = () => {
     const city = localStorage.getItem("city");
     navigate("/");
 
+
+
     const [showNormalDiv, setNormalDiv] = useState(false);
+    const [selectCar, setSelectCar] = useState();
+    const [AllBrands, setAllBrands] = useState([]);
+    const [CarModels, SetCarModels] = useState([]);
+    const [varient, setVarient] = useState([]);
+    const [showModelDiv, setShowModelDiv] = useState(false);
+    const [showbrandDiv, setShowBrandDiv] = useState(false);
+    const [showVarinetDiv, setShowVarinetDiv] = useState(false);
+    const [service, setService] = useState([]);
+    const [servicePrice, setServicePrice] = useState([]);
+    const [brandName, setBrandName] = useState([]);
+    const [brandImage, setBrandImage] = useState([]);
+    const [showServicesDiv, SetShowServicesDiv] = useState(false);
+    const [SelectedDiv, setSelectedDiv] = useState(true);
+    const [id, setId] = useState();
+    const [cart, setCart] = useState([]);
+    const [Servicename, setServiceName] = useState([]);
 
 
+    const goBack4 = () => {
+
+        SetShowServicesDiv(false);
+        setServicePrice([
+            [],
+            [],
+            [],
+
+        ]);
+    };
+
+    const goBack3 = () => {
+        setShowModelDiv(false);
+
+    }
+
+    const goBack2 = () => {
+        setShowBrandDiv(false);
+    }
+
+    const goBack = () => {
+        setNormalDiv(false);
+    }
+
+
+    const handleAddToCart = (sId) => {
+        debugger;
+
+        setId(sId);
+        try {
+            if (service.length > 0) {
+                debugger;
+
+                setCart([...cart, service]);
+                console.log(cart);
+                setService(null);
+                SetShowServicesDiv(true);
+
+            }
+        }
+        catch (error) {
+        }
+    };
+
+    const SelectServiceHandler = (prop) => {
+
+        SelectService(prop);
+
+    }
 
     const handleButtonClick = () => {
 
         setNormalDiv(true);
         GetAllBrands();
     };
-
-
-
-
-    const [selectCar, setSelectCar] = useState();
-
-    const [AllBrands, setAllBrands] = useState([]);
-
-    const [CarModels, SetCarModels] = useState([]);
-
-    const [varient, setVarient] = useState([]);
-
-    const [showModelDiv, setShowModelDiv] = useState(false);
-
-    const [showbrandDiv, setShowBrandDiv] = useState(false);
-
-    const [showVarinetDiv, setShowVarinetDiv] = useState(false);
-
-    const [service, setService] = useState([]);
-
-    const [servicePrice, setServicePrice] = useState([]);
-
-    const [showServicesDiv, SetShowServicesDiv] = useState(false);
-
-
 
     const handlerCarClick = (prop) => {
 
@@ -76,8 +118,6 @@ const Periodic = () => {
 
         GetAllVarients();
     }
-
-
 
     // Get all Brands 
     const GetAllBrands = () => {
@@ -144,11 +184,52 @@ const Periodic = () => {
 
 
 
-    const SelectServiceHandler = (prop) => {
+    // Place order to database
+    const bookedService = (Service, Model, Price) => {
+        debugger;
+        const customerId = localStorage.getItem("CustomerId")
 
-        SelectService(prop);
+        const custtoken = localStorage.getItem("customerToken");
+    // console.log(token);
 
-    }
+
+        if (custtoken != null) {
+
+            let serviceId;
+
+            if (Service === "BASICPMS") {
+                serviceId = 1;
+            } else if (Service === "STANDARDPMS") {
+                serviceId = 2;
+            } else {
+                serviceId = 3;
+            }
+
+            const data = {
+                ServiceId: serviceId,
+                VehicleModel: Model,
+                ServicePrice: Price
+            };
+            
+            axios.defaults.headers.common["Authorization"] = "Bearer " + custtoken;
+            axios.post('http://localhost:63650/api/Order/orderDetail/${CustomerId}', data)
+                .then(response => {
+                    console.log('Post request successful:', response.data);
+                    // Handle the response data if needed
+                })
+                .catch(error => {
+                    alert("order not placed..!")
+                    console.error('Error making post request:', error);
+                });
+
+        }
+        else
+        {
+            alert("please Login first then Book service ...!");
+        }
+    };
+
+
 
 
     //Get service at appropriate model and varient
@@ -164,14 +245,23 @@ const Periodic = () => {
                 // handle success
 
                 const services = response.data;
-                console.log(services);
-
                 var priceArray = services.map(service => service.price);
-                setServicePrice(priceArray);
+                var BrandArray = services.map(servicee => servicee.ModelName);
+                var BrandImage = services.map(Service => Service.ModelImage);
+                var Servicename = services.map(ServiceName => ServiceName.ServiceName);
 
-                console.log(servicePrice);
+                
+                setServicePrice(priceArray);
+                setBrandName(BrandArray);
+                setBrandImage(BrandImage);
+                setService(services);
+                setServiceName(Servicename);
+                console.log(service);
                 debugger;
-                SetShowServicesDiv(true);
+
+
+
+
                 // Assuming setVarient is a function to update state
                 setService(services); // Corrected function name
 
@@ -180,12 +270,8 @@ const Periodic = () => {
 
                 console.log(error);
             });
-        debugger;
+
     };
-
-
-
-
 
 
     return (
@@ -193,16 +279,17 @@ const Periodic = () => {
 
 
             <div className="mainDiv">
-                <div style={{ textAlign: 'center' }}>
-                    <br />
-                    <br />
-                    <h2>
+              
+                <br /><br /> <br /> <br />
+                <div id="scheduledPackages" className="scheduledPackages " style={{ textAlign: 'center' }}>
+
+                    <h2 className="Title" >
                         Scheduled Packages
                     </h2>
+
                 </div>
-                <br />
-                <br />
-                <br />
+                <br /><br /> <br /> <br /><br/>
+
                 <div id="1" className="packages1">
 
                     <div>
@@ -230,13 +317,10 @@ const Periodic = () => {
                             </div>
                             <div>
 
-                                {/* <h> <FontAwesomeIcon icon="rupee-sign" style={{ color: 'black',fontSize:"20px"}}/></h>
-                           
-                           <br/> */}
                                 <h style={{ color: 'black', fontSize: "30px" }}><FontAwesomeIcon icon="inr" style={{ color: 'black', fontSize: "30px" }} />&nbsp;{servicePrice[0]}</h>
                                 <br />
                                 <br />
-                                <button className="btn btn-danger">Add To Card</button>
+                                <button onClick={() => handleAddToCart(0)} className="btn btn-danger">Add To Card</button>
                             </div>
                         </div>
                     </div>
@@ -269,17 +353,19 @@ const Periodic = () => {
                             </div>
                             <div>
 
-                                {/* <h> <FontAwesomeIcon icon="rupee-sign" style={{ color: 'black',fontSize:"20px"}}/></h>
-       
-       <br/> */}
                                 <h style={{ color: 'black', fontSize: "30px" }}><FontAwesomeIcon icon="inr" style={{ color: 'black', fontSize: "30px" }} />&nbsp;{servicePrice[1]} </h>
                                 <br />
                                 <br />
-                                <button className="btn btn-danger">Add To Card</button>
+                                <button onClick={() => handleAddToCart(1)} className="btn btn-danger">
+                                    Add To Cart
+                                </button>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
+
                 <br />
 
                 <div id="1" className="packages1">
@@ -309,44 +395,38 @@ const Periodic = () => {
                             </div>
                             <div>
 
-                                {/* <h> <FontAwesomeIcon icon="rupee-sign" style={{ color: 'black',fontSize:"20px"}}/></h>
-       
-       <br/> */}
+
                                 <h style={{ color: 'black', fontSize: "30px" }}><FontAwesomeIcon icon="inr" style={{ color: 'black', fontSize: "30px" }} />&nbsp;{servicePrice[2]} </h>
                                 <br />
                                 <br />
-                                <button className="btn btn-danger">Add To Card</button>
+                                <button onClick={() => handleAddToCart(2)} className="btn btn-danger">Add To Card</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br />
-
-
 
 
             </div>
 
-
             {/* -------------------------------//Cart Div//--------------------------------------- */}
 
 
-            <div>
+            <div style={{ borderRadius: "20px" }}>
                 <div className="secondDiv" id="second" style={{ display: showNormalDiv ? 'none' : 'block' }} >
 
                     <br />
                     <br />
-                    <h2 style={{ paddingLeft: "80px", paddingRight: "60px" }}>Experince The Best Car Service In <h2>{city}</h2> </h2>
+                    <h2 style={{ paddingLeft: "80px", paddingRight: "60px" }}>Experince The Best Car Service In <h2 style={{ textDecoration: "underLine" }}>{city}</h2> </h2>
                     <br />
                     <br />
                     <center>
                         <form>
-                            <input style={{ paddingTop: "10px", textAlign: "center" }} type="tel" id="phone" placeholder="Mobile" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                            <input style={{ paddingTop: "10px", textAlign: "center" }} type="tel" id="phone" placeholder="Enter Mobile No." name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
                             <br />
                             <br />
 
 
-                            <input type="" style={{ paddingTop: "10px", textAlign: "center" }} value={selectCar} readOnly required></input>
+                            {/* <input type="" style={{ paddingTop: "10px", textAlign: "center" }} value={selectCar} readOnly required></input> */}
                             <br />
                             <br />
                             <button className="btn btn-primary" onClick={handleButtonClick}>Check Price For Free</button>
@@ -363,13 +443,16 @@ const Periodic = () => {
 
 
                 {showNormalDiv && (
-                    <div className="secondDiv" style={{ height: "350px", width: "500px", }} >
+                    <div className="secondDiv" style={{ height: "360px", width: "500px", }} >
                         <div style={{ display: showbrandDiv ? 'none' : 'block' }}
                             className="showpricediv"
 
                         >
                             <div className="showpricediv.inner"
                             >
+
+                                <FontAwesomeIcon onClick={goBack} icon={faArrowLeft} style={{ color: 'black', fontSize: "30px" }} />
+
                                 <br />
                                 <h5 style={{ textAlign: "center" }}> <b>Select Manufacturer</b></h5>
                                 <br />
@@ -401,11 +484,13 @@ const Periodic = () => {
 
 
                 {showbrandDiv && (
-                    <div className="secondDiv " style={{ height: "610px", width: "500px", display: showModelDiv ? 'none' : 'block' }}>
+                    <div className="secondDiv " style={{ height: "630px", width: "500px", display: showModelDiv ? 'none' : 'block' }}>
 
 
                         <div className="showpricediv">
                             <div className="showpricediv.inner">
+
+                                <FontAwesomeIcon onClick={goBack2} icon={faArrowLeft} style={{ color: 'black', fontSize: "30px" }} />
                                 <br />
                                 <h5 style={{ textAlign: "center" }}>
                                     <b>Select Car Model</b>
@@ -414,7 +499,7 @@ const Periodic = () => {
                                 <h4 className="CarSelector">{selectCar}</h4>
                                 <br />
 
-                                <div className="carmodelLogosDiv">
+                                <div id="content" className="carmodelLogosDiv">
                                     {/* Mapping over the AllBrands array */}
                                     {CarModels.map((models) => (
                                         <div className="logo" key={models.ModelId}>
@@ -440,9 +525,12 @@ const Periodic = () => {
 
 
                 {showModelDiv && (
-                    <div className="secondDiv" style={{ height: "450px", width: "500px", display: showServicesDiv ? 'none' : 'block' }}>
+                    <div className="secondDiv" style={{ height: "460px", width: "500px", display: showServicesDiv ? 'none' : 'block' }}>
                         <div className="showpricediv">
                             <div className="showpricediv-inner">
+
+                                <FontAwesomeIcon onClick={goBack3} icon={faArrowLeft} style={{ color: 'black', fontSize: "30px" }} />
+
                                 <br />
                                 <h5 style={{ textAlign: "center" }}>
                                     <b>Select Car Variant</b>
@@ -478,6 +566,40 @@ const Periodic = () => {
 
 
 
+                {showServicesDiv && (
+                    <div className="secondDiv" style={{ height: "450px", width: "500px" }}>
+                        <div className="showpricediv">
+                            <div className="showpricediv-inner">
+
+
+                                <FontAwesomeIcon onClick={goBack4} icon={faArrowLeft} style={{ color: 'black', fontSize: "30px" }} />
+
+                                <br /><br />
+                                <div><h3>{Servicename[id]}</h3></div>
+                                <br />
+                                <center>   <img style={{ width: "180px" }} src={brandImage[0]} alt="Brand Logo" />
+                                    <br />
+                                    <h3>{brandName[0]}</h3>
+
+
+                                </center>
+                                <br /><br />
+                                <div className="checkout">
+
+                                    <div>
+                                        <h2>  <FontAwesomeIcon icon="inr" style={{ color: 'black', fontSize: "30px" }} /> {servicePrice[id]}</h2>
+                                    </div>
+                                    <div>
+                                        <button className="btn btn-danger" onClick={() => bookedService(Servicename[id], brandName[0], servicePrice[id])} >Checkout</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+
+
 
 
             </div>
@@ -488,6 +610,8 @@ const Periodic = () => {
     )
 
 }
+
+
 
 export default Periodic;
 

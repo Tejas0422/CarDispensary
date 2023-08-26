@@ -1,5 +1,12 @@
+import GarageHome from "./Components/Garage/Registration/GarageHomePage/GarageHome";
+import Profile from "./Components/Garage/Registration/GarageProfile/Profile";
+import OrdDetail from "./Components/Garage/Registration/OrderDetail/OrderDetail";
+import Signup from "./Components/Garage/Registration/Signup";
+
 import Layout from "./Components/Layout/Layout";
-import Periodic from "./Components/Services/Periodic";
+
+
+
 
 
 
@@ -7,9 +14,12 @@ import Periodic from "./Components/Services/Periodic";
 
 
 function App() {
-   return <Layout/>;
+        // return <Layout/>;
+      // return <OrdDetail/>
 
-  // return <Periodic></Periodic>
+      return <Profile />
+      
+ 
   
   
   

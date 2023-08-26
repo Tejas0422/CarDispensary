@@ -1,5 +1,5 @@
 import "../Header/Header.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Header/image/earth-americas-solid.svg";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router-dom";
@@ -7,21 +7,24 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
 
+    
     const [location, setLocation] = useState("");
     const navigate = useNavigate();
     const handleLocation = (name) => {
         setLocation(name);
         // console.log("Clicked by: " + name);
         debugger;
-        localStorage.setItem("city",name);
-navigate("/");
+        localStorage.setItem("city", name);
+        navigate("/");
 
 
     };
 
-    const Login = () => {
-        navigate("/Login");
-    };
+  
+
+; 
+
+
 
     return (
 
@@ -108,19 +111,20 @@ navigate("/");
                     </div>
 
 
-{/* ----------------------------------------------- right Side---------------------------------------------------------------- */}
+                    {/* ----------------------------------------------- right Side---------------------------------------------------------------- */}
 
                     <div className="header__lower__divsecond gap-5">
                         {/* Login and Register links */}
+
                         <div>
-                            <Link className="Link" to="/Register">Register</Link>
-                        </div>
-                        <div>
-                            <Link className="Link" to="/Login">Login</Link>
-                            {/* <button  onClick={Login}>Login</button> */}
+                            <Link className="Link" to="/Registration">Registration</Link>
                         </div>
 
-                    </div>
+                        <div >
+                            <Link className="Link" to="/Login">Login</Link>
+                        </div>
+                      
+                        </div> 
                 </div>
 
             </div>
