@@ -37,7 +37,7 @@
   </EntityType>
   <EntityType Name="GarageDetail">
     <Key>
-      <PropertyRef Name="License" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="GarageName" Type="varchar" MaxLength="50" Nullable="false" />

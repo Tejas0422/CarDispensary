@@ -21,7 +21,7 @@ namespace CarDispensaryV1.Controllers
         #region Inventory Added
 
         [HttpPost]
-        [Route("api/InventoryController/addInventory")]
+        [Route("api/Inventory/addInventory")]
 
         public IHttpActionResult addInventory(InventoryDetail inventoryDetail)
         {
@@ -36,7 +36,6 @@ namespace CarDispensaryV1.Controllers
         }
 
         #endregion 
-
 
 
     }

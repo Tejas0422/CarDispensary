@@ -40,7 +40,7 @@
   </EntityType>
   <EntityType Name="GarageDetail">
     <Key>
-      <PropertyRef Name="License" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="GarageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -80,10 +80,10 @@
     <Property Name="VisitMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ServiceId" Type="Int32" />
     <Property Name="GarageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Service" Relationship="Self.FK__OrderDeta__Servi__3F466844" FromRole="OrderDetail" ToRole="Service" />
     <Property Name="ServicePrice" Type="Double" />
     <Property Name="VarientName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ServiceDone" Type="Boolean" />
+    <NavigationProperty Name="Service" Relationship="Self.FK__OrderDeta__Servi__3F466844" FromRole="OrderDetail" ToRole="Service" />
   </EntityType>
   <EntityType Name="RateChart">
     <Key>

@@ -30,13 +30,14 @@
 }
 
 .header__lower {
-  height: 5%; 
+  height: 10%; 
   background: #000d6b;
   display: flex;
-
+font-size: 1vw;
   align-items: center;
   color: #fff;
 }
+
 
 .header__lower__divfirst
 {
@@ -62,6 +63,13 @@
   text-decoration: none;
   color: white;
 }
+
+.link
+{
+text-decoration: none;
+  color:black 
+}
+
 
 .Link:hover {
   color: white;

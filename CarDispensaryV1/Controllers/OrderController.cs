@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using CarDispensaryV1.Authentication;
+using CarDispensaryV1.Filter;
 using CarDispensaryV1.Models;
 
 namespace CarDispensaryV1.Controllers
@@ -15,10 +17,11 @@ namespace CarDispensaryV1.Controllers
        
         CarDispensaryEntities CD = new CarDispensaryEntities();
 
-      
-       
+
+
         // At the time of Add cart
         #region Add orderDetail    
+        //[JwtAuthentication]
 
         [HttpPost]
         [Route("api/Order/orderDetail/{id}")]
@@ -33,6 +36,7 @@ namespace CarDispensaryV1.Controllers
                 orderDetail.CustAddress = ExistingCustomer.CustAddress;
                 orderDetail.CustEmail = ExistingCustomer.CustEmail;
                 orderDetail.CustMobileNo = ExistingCustomer.CustMobile;
+                orderDetail.ServiceDone = true;
                 CD.OrderDetails.Add(orderDetail);
                 
                 CD.SaveChanges();
@@ -50,10 +54,12 @@ namespace CarDispensaryV1.Controllers
         #endregion     
 
         #region update OrderDetail
+
+
         [HttpPut]
         [Route("api/Order/editOrder/{orderId}")]
 
-        public IHttpActionResult editOrder(int orderId, [FromBody] OrderDetail orderDetail) 
+        public IHttpActionResult editOrder(int orderId, OrderDetail orderDetail) 
         {
 
             OrderDetail  OD = CD.OrderDetails.Find(orderId);
@@ -67,10 +73,10 @@ namespace CarDispensaryV1.Controllers
                 OD.GarageName = orderDetail.GarageName; 
                 OD.ManufacturingYear = orderDetail.ManufacturingYear;   
                 OD.OdometerReading = orderDetail.OdometerReading;   
-                OD.VehicleModel = orderDetail.VehicleModel; 
-                OD.ServiceId = orderDetail.ServiceId;
+                OD.VehicleModel = orderDetail.VehicleModel;
+                 OD.ServiceId = orderDetail.ServiceId;    
                 OD.CustEmail = orderDetail.CustEmail;
-                OD.ServiceDone = orderDetail.ServiceDone;   
+                OD.ServiceDone = orderDetail.ServiceDone; 
                 OD.ServicePrice = orderDetail.ServicePrice; 
                 OD.VarientName= orderDetail.VarientName;    
 
@@ -87,22 +93,28 @@ namespace CarDispensaryV1.Controllers
         [Route("api/Order/GetOrderDetail/{OrderID}")]
 
         public IHttpActionResult GetOrderDetail(int  orderId) 
+        
         {
            if(orderId != 0)
             {
                var result = CD.OrderDetails.Where(O=> O.OrderId == orderId).
                     Select(  O=>new
                     {
+                        OrderId = orderId,  
                         CarRegistrationNo = O.CarRegistrationNo,
-                        MF = O.ManufacturingYear.ToString(),
-                        OD = O.OdometerReading,
-                        VM =O.VehicleModel,
-                        CN = O.CustomerName,
-                        CMN = O.CustMobileNo,
-                        CE = O.CustEmail,
-                         GN=O.GarageName,
-                        SI = O.Service.ServiceName,
-                        V = O.VisitMode,
+                         ManufacturingYear = O.ManufacturingYear.ToString(),
+                        OdometerReading = O.OdometerReading,
+                        VehicleModel =O.VehicleModel,
+                        CustomerName = O.CustomerName,
+                        CustMobileNo = O.CustMobileNo,
+                        CustEmail = O.CustEmail,
+                        CustAddress = O.CustAddress,
+                        GarageName = O.GarageName,
+                        ServiceName = O.Service.ServiceName,
+                        ServicePrice = O.ServicePrice, 
+                        VarientName = O.VarientName,
+                        VisitMode = O.VisitMode,
+
 
 
                     }).Distinct().ToList();

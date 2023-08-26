@@ -24,15 +24,22 @@ CarDispensaryEntities CD = new CarDispensaryEntities();
 
         public string registration(GarageDetail garageDetail) 
         {
-            if(garageDetail != null) 
+            try
             {
-               CD.GarageDetails.Add(garageDetail);  
-                CD.SaveChanges();
-                return "Registration Success";
+                if (garageDetail != null)
+                {
+                    CD.GarageDetails.Add(garageDetail);
+                    CD.SaveChanges();
+                    return "Registration Success";
+                }
+
+                return "Something went Wrong";
             }
 
-            return "Something went Wrong";
-
+            catch (Exception ex) 
+            {
+               return "Something Went wrong";   
+            }
 
         }
 
@@ -53,8 +60,14 @@ CarDispensaryEntities CD = new CarDispensaryEntities();
             {
                 var existingGarage = CD.GarageDetails.FirstOrDefault(g => g.GarageMobile == garageDetail.GarageMobile && g.Password == garageDetail.Password);
 
-                if(existingGarage !=null)
-                     return Ok("Login successful.");
+                if (existingGarage != null)
+                {
+                    
+
+                    var garageId = existingGarage.Id;
+
+                    return Ok(garageId);
+                        }
             }
 
             else
