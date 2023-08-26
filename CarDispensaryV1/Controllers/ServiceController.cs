@@ -7,12 +7,14 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Services.Description;
 using System.Web.Http.Cors;
+using CarDispensaryV1.Authentication;
+using CarDispensaryV1.Filter;
 
 namespace CarDispensary.Controllers
 {
 
     [EnableCors("*","*","*")]
-    
+   
     public class ServiceController : ApiController
     {
         CarDispensaryEntities CD = new CarDispensaryEntities();
@@ -81,17 +83,18 @@ namespace CarDispensary.Controllers
         #endregion
 
         #region GetAll Vareint 
-
+        
         [HttpGet]
         [Route("api/Service/GetAllVarient")]
         
         public IHttpActionResult GetAllVarient()
         {
-            var result = CD.Varients.
-                Where(r => r.VarientId == 1 )
+            var result = CD.Varients
                 .Select(r => new 
                 {
-                    VarImage = "http://localhost:63650//images/" + r.VarImage,            
+                    VarientId = r.VarientId,    
+                    VarName = r.VarName,
+                    VarImage = "http://localhost:63650//images/" + r.VarImage,          
                 }).ToList();
                 
 
@@ -103,16 +106,16 @@ namespace CarDispensary.Controllers
 
         #region Get A Specific CarModel With Specific Varient and its All Service price basis of BrandId  and VarientId 
 
-
+       
         [HttpGet]
-        [Route("api/Service/GetCarModel/{brandId}/{serviceId}/{varientId}")]
-        public IHttpActionResult GetCarModel(int brandId , int serviceId , int varientId)
+        [Route("api/Service/GetCarModel/{modelId}/{varientId}")]
+        public IHttpActionResult GetCarModel( int modelId , int varientId)
         {
             var result = CD.RateCharts
-                .Where(r => r.BrandId == brandId &&  r.ServiceId==serviceId && r.VarientId==varientId)
+                .Where(r =>  r.ModelId == modelId && r.VarientId==varientId)
                 .Select(r => new
                 {
-                    VarImage = "http://localhost:63650//images/" + r.CarModel.ModelImage,
+                    ModelImage = "http://localhost:63650//images/" + r.CarModel.ModelImage,
                     ModelName = r.CarModel.ModelName,
                     ServiceName = r.Service.ServiceName,
                     price = r.Price

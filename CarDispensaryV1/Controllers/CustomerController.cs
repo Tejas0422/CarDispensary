@@ -6,14 +6,18 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Services.Description;
 using CarDispensaryV1.Models;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 
 namespace CarDispensary.Controllers
 
 {
-
+   
     [EnableCors("*", "*", "*")]
+   
     public class CustomerController : ApiController
     {
         CarDispensaryEntities CD = new CarDispensaryEntities();
@@ -25,60 +29,85 @@ namespace CarDispensary.Controllers
         [HttpPost]
         [Route("api/Customer/Registration")]
 
-        public string Registration(Customer customer)
+        public IHttpActionResult Registration(Customer customer)
         {
             if (customer != null)
             {
                 try
                 {
-
                     CD.Customers.Add(customer);
                     CD.SaveChanges();
 
+                    var response = new RegistrationResponse
+                    {
+                        Status = "Success",
+                        Message = "Customer registered successfully."
+                    };
 
-                    return "Customer registered successfully.";
+                    return Ok(response);
                 }
                 catch (Exception ex)
                 {
-                    return "Error while registering customer: " + ex.Message;
+                    var response = new RegistrationResponse
+                    {
+                        Status = "Error",
+                        Message = "Error while registering customer: " + ex.Message
+                    };
+
+                    return Ok(response);
                 }
             }
 
-            return "Invalid customer data.";
+            var invalidResponse = new RegistrationResponse
+            {
+                Status = "Error",
+                Message = "Invalid customer data."
+            };
+            return Ok(invalidResponse);
         }
+      
+
+
+        #endregion
+
+         #region CustomerLogin
+
+                [HttpPost]
+        [Route("api/Customer/Login")]
+
+        public String Login(Customer customer)
+        {
+            
+                var existingCustomer = CD.Customers.FirstOrDefault(c => c.CustEmail == customer.CustEmail && c.CustPassword == customer.CustPassword);
+                if (existingCustomer != null)
+                {
+
+                    var response = new RegistrationResponse
+                    {
+                        Status = "Success",
+                        Message = "Customer Login successfully.",
+                        CustomerId = existingCustomer.Id
+                    };
+
+                    return JsonConvert.SerializeObject(response);
+                }
+                else
+                {
+                    var invalidResponse = new RegistrationResponse
+                    {
+                        Status = "Error",
+                        Message = "Invalid customer data."
+                    };
+                    return JsonConvert.SerializeObject(invalidResponse);
+                }
+            }
+
+           
 
         #endregion
 
 
 
-        #region CustomerLogin
 
-        //[HttpPost]
-        //[Route("api/Customer/Login")]
-
-        //public IHttpActionResult Login(Customer customer)
-        //{
-        //    if (customer != null)
-        //    {
-        //        var existingCustomer = CD.Customers.FirstOrDefault(c => c.CustEmail == customer.CustEmail && c.CustPassword == customer.CustPassword);
-        //        if (existingCustomer != null)
-        //        {
-
-        //            return Ok("Login successful.");
-        //        }
-        //        else
-        //        {
-        //            return Ok("Invalid email or customer does not exist.");
-        //        }
-        //    }
-
-        //    return Ok("Invalid customer data.");
-        //}
-
-        #endregion
-
-
-       
-
-    }   
+    }
 }

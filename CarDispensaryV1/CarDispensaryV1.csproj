@@ -49,8 +49,39 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\CarDispensary\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.32.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\Microsoft.IdentityModel.Abstractions.6.32.1\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.32.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\Microsoft.IdentityModel.JsonWebTokens.6.32.1\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.32.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\Microsoft.IdentityModel.Logging.6.32.1\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.32.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\Microsoft.IdentityModel.Tokens.6.32.1\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.32.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.IdentityModel.Tokens.Jwt.6.32.1\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\CarDispensary\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -58,6 +89,18 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Text.Encodings.Web.4.7.2\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\CarDispensary\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\CarDispensary\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -100,16 +143,52 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\alto.png" />
+    <Content Include="images\altroz.png" />
+    <Content Include="images\amaze.png" />
+    <Content Include="images\aura.png" />
+    <Content Include="images\baleno.png" />
+    <Content Include="images\brezza.jpeg" />
+    <Content Include="images\brezza.png" />
+    <Content Include="images\celerio.png" />
+    <Content Include="images\ciaz.png" />
+    <Content Include="images\city.png" />
+    <Content Include="images\civic.png" />
+    <Content Include="images\creta.png" />
+    <Content Include="images\diesel.png" />
+    <Content Include="images\dzire.png" />
+    <Content Include="images\eon.png" />
+    <Content Include="images\ertiga.png" />
     <Content Include="images\Honda-logo.png" />
     <Content Include="images\hyundai-logo.png" />
+    <Content Include="images\i10.png" />
+    <Content Include="images\i20.png" />
+    <Content Include="images\Indigo.jpeg" />
+    <Content Include="images\Indigo.png" />
     <Content Include="images\Maruti-Logo.png" />
+    <Content Include="images\mobilio.png" />
+    <Content Include="images\nexon.png" />
+    <Content Include="images\petrol.png" />
+    <Content Include="images\punch.png" />
+    <Content Include="images\safari.png" />
+    <Content Include="images\sonata.png" />
     <Content Include="images\suzuki.jpeg" />
+    <Content Include="images\swift.png" />
+    <Content Include="images\sx4.png" />
     <Content Include="images\Tata-Altroz.jpeg" />
     <Content Include="images\Tata-Logo.png" />
+    <Content Include="images\tiago.png" />
+    <Content Include="images\tigor.png" />
+    <Content Include="images\venue.png" />
+    <Content Include="images\verna.png" />
+    <Content Include="images\wagonr.png" />
+    <Content Include="images\wrv.png" />
+    <Content Include="images\zest.jpeg" />
+    <Content Include="images\zest.png" />
     <Content Include="Models\CarDispensary.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CarDispensary.Context.cs</LastGenOutput>
       <DependentUpon>CarDispensary.edmx</DependentUpon>
+      <LastGenOutput>CarDispensary.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\CarDispensary.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -120,13 +199,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication\Auth.cs" />
+    <Compile Include="Authentication\CustomerLogin.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
-    <Compile Include="Controllers\CustomerLoginController.cs" />
+    <Compile Include="Controllers\CustomerTokenController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
+    <Compile Include="Controllers\GarageTokenController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\RegistrationResponse.cs" />
     <Compile Include="Controllers\RequestHandlerController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Filter\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="Filter\AuthenticationFailureResult.cs" />
+    <Compile Include="Filter\HttpAuthenticationChallengeContextExtensions.cs" />
+    <Compile Include="Filter\JwtAuthentication.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +250,7 @@
     <Compile Include="Models\InventoryDetail.cs">
       <DependentUpon>CarDispensary.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JwtToken.cs" />
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>CarDispensary.tt</DependentUpon>
     </Compile>
@@ -178,6 +266,32 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\alto.webp" />
+    <Content Include="images\altroz.webp" />
+    <Content Include="images\amaze.webp" />
+    <Content Include="images\aura.webp" />
+    <Content Include="images\baleno.webp" />
+    <Content Include="images\celerio.webp" />
+    <Content Include="images\ciaz.webp" />
+    <Content Include="images\city.webp" />
+    <Content Include="images\civic.webp" />
+    <Content Include="images\creta.webp" />
+    <Content Include="images\dzire.webp" />
+    <Content Include="images\eon.webp" />
+    <Content Include="images\ertiga.webp" />
+    <Content Include="images\i10.webp" />
+    <Content Include="images\i20.webp" />
+    <Content Include="images\mobilio.webp" />
+    <Content Include="images\nexon.webp" />
+    <Content Include="images\punch.webp" />
+    <Content Include="images\safari.webp" />
+    <Content Include="images\swift.webp" />
+    <Content Include="images\tiago.webp" />
+    <Content Include="images\tigor.webp" />
+    <Content Include="images\venue.webp" />
+    <Content Include="images\verna.webp" />
+    <Content Include="images\wagonr.webp" />
+    <Content Include="images\wrv.webp" />
     <EntityDeploy Include="Models\CarDispensary.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CarDispensary.Designer.cs</LastGenOutput>
